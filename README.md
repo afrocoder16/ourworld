@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # library-codex-valentine
 
 Full-screen fantasy scroll journey with a chapter-driven **World Engine** (VFX, sigils, and adaptive audio).
@@ -124,3 +125,6 @@ git push -u origin main
 
 Then import repo in Vercel and deploy.
 
+=======
+# ourworld
+>>>>>>> ebd59c68da368930b13b69c05625845d9a5dc7bb
