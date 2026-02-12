@@ -91,9 +91,10 @@ export const book: BookConfig = {
   subtitle: "A private field record of fate, fire, and u",
   dedication: "Filed by: your favorite co-conspirator",
   audio: {
-    defaultTrackId: "cozy-candlelight",
+    defaultTrackId: "teresa-teng",
     specialTrackId: "dragon-vow-proposal",
     tracks: [
+      { id: "teresa-teng", label: "Teresa Teng", vibe: "classic", src: audio("Teresa Teng") },
       { id: "cozy-candlelight", label: "Candle Archive", vibe: "cozy", src: audio("cozy-candlelight") },
       { id: "veil-of-glyphs", label: "Veil of Glyphs", vibe: "mysterious", src: audio("veil-of-glyphs") },
       { id: "chaos-sidequest", label: "Chaos Sidequest", vibe: "playful", src: audio("chaos-sidequest") },
@@ -154,7 +155,7 @@ export const book: BookConfig = {
       supportingMedia: [img("face_time", "FaceTime call"), img("face_time_2", "FaceTime part 2")],
       tags: ["prologue", "cozy"],
       redactedLine: "Classified note: my sleep schedule was immediately ruined.",
-      trackId: "veil-of-glyphs",
+      trackId: "teresa-teng",
       intensity: 0.42,
       stinger: "/audio/sfx/psynet-pulse.mp3"
     },
@@ -173,7 +174,7 @@ export const book: BookConfig = {
       supportingMedia: [img("2-dateout", "First date out"), img("3-kiss", "First kiss")],
       tags: ["cozy"],
       redactedLine: "Redacted: convincing u took 2 minutes, falling for u took less.",
-      trackId: "cozy-candlelight",
+      trackId: "teresa-teng",
       intensity: 0.5
     },
     {
@@ -191,7 +192,7 @@ export const book: BookConfig = {
       supportingMedia: [],
       tags: ["mission", "goofy"],
       redactedLine: "Hidden memo: that fake anniversary became my favorite date marker.",
-      trackId: "chaos-sidequest",
+      trackId: "teresa-teng",
       intensity: 0.63,
       stinger: "/audio/sfx/guild-stamp.mp3"
     },
@@ -210,7 +211,7 @@ export const book: BookConfig = {
       supportingMedia: [vid("her_happiness- vid", "Her happiness"), vid("her_singingwithme- vid", "Her singing with me")],
       tags: ["cozy", "mission"],
       redactedLine: "Sealed truth: I fell for you in the quiet moments you didn't even realize were changing me.",
-      trackId: "veil-of-glyphs",
+      trackId: "teresa-teng",
       intensity: 0.54,
       stinger: "/audio/sfx/portal-shift.mp3"
     },
@@ -229,21 +230,21 @@ export const book: BookConfig = {
       supportingMedia: [vid("down_town_walk-vid", "Downtown walk", true), vid("her_cute_laughing", "Her cute laughing", true), vid("her_cute_smile-vid", "Her cute smile", true)],
       tags: ["mission", "cozy"],
       redactedLine: "Classified warmth: Somewhere between your smile and those quiet streets... I knew I was no longer walking alone.",
-      trackId: "cozy-candlelight",
+      trackId: "teresa-teng",
       intensity: 0.58,
       stinger: "/audio/sfx/guild-stamp.mp3"
     },
     {
       id: "chapter-3-side-quest-adventure",
-      chapterTitle: "Chapter 3: Side Quest Adventure",
+      chapterTitle: "Chapter 3: The Queen Takes The Water",
       dateLabel: "Expedition File: Kayak Arc",
       bodyText: [
-        "First paddle was shaky, little fear in your eyes, big brave energy anyway.",
-        "Ten minutes later u moved like an assassin-queen on water, and I became your backup rower.",
-        "At tiger park u carried that same quiet power, soft grin, full predator grace."
+        "You stepped into that kayak unsure... cautious... maybe even a little scared.\n\nBut I watched something happen that day.\nThe hesitation faded.\nThe warrior showed up.",
+        "you were graceful, fearless, impossible to ignore - just like Like Celaena\n\nStroke by stroke... you didn't just learn the water.\nYou claimed it.\n\nAnd somewhere between the waves and your laughter...\nI realized I wasn't just falling for your softness -\nI was falling for your strength.",
+        "Then came the tiger park.\nYour favorite creature... powerful, elegant, untamed.\n\nI couldn't help but smile -\nyou've always carried that same energy."
       ],
-      quoteLine: "\"U don't enter adventure mode, u command it.\"",
-      footnote: "Field note: co-captain with claws.",
+      quoteLine: "\"No map. No fear. Just us... and whatever horizon dared to wait.\"",
+      footnote: "",
       heroMedia: vid("first_kayak-vid", "First kayak video"),
       supportingMedia: [
         vid("The_tiger_park_vid", "Tiger park video"),
@@ -251,22 +252,22 @@ export const book: BookConfig = {
         img("The_tiger_park-2", "Tiger park second image")
       ],
       tags: ["adventure"],
-      redactedLine: "Co-captain stamp: locked, trusted, never revoked.",
-      trackId: "chaos-sidequest",
+      redactedLine: "Agent note: Co-captain confirmed.",
+      trackId: "teresa-teng",
       intensity: 0.68,
       stinger: "/audio/sfx/ember-burst.mp3"
     },
     {
       id: "mission-03-city-walk",
-      chapterTitle: "Mission 03: City Walk",
+      chapterTitle: "Mission 03: The two fools",
       dateLabel: "Urban File: Predators & Pavement",
       bodyText: [
-        "Downtown lights made everything cinematic, then we ruined it with weird faces and laughed till we folded.",
-        "Tiger park chaos, hand in hand, zero cool points and maximum us.",
-        "Funniest report: your weird face beat mine by illegal margins."
+        "Somewhere along the way... we stopped trying to look perfect.\n\nThe weird faces came out.\nThe unfiltered laughter.\nThe beautiful chaos.",
+        "You saw my foolish side and didn't run\nyou matched it.\n\nThat's when I knew what we had was rare.",
+        "Anyone can love the polished version.\nBut us?\nWe loved each other unguarded."
       ],
-      quoteLine: "\"Real intimacy is looking unhinged together and feeling safe.\"",
-      footnote: "Street log: chaos looked cute on us.",
+      quoteLine: "\"Comfort is when your soul stops performing.\"",
+      footnote: "",
       heroMedia: vid("making_foolsh_snap videos - vid", "Making foolish snap video", true),
       supportingMedia: [
         img("weird_face_making-1", "Weird face making 1"),
@@ -276,22 +277,22 @@ export const book: BookConfig = {
         img("weird_face_making-5", "Weird face making 5")
       ],
       tags: ["mission", "adventure"],
-      redactedLine: "Classified: I acted normal, but I was staring at u the whole time.",
+      redactedLine: "Hidden realization: I have never been more myself than when I'm with you.",
       trackId: "distance-oath",
       intensity: 0.62,
       stinger: "/audio/sfx/guild-stamp.mp3"
     },
     {
       id: "chapter-4-proof-of-chemistry",
-      chapterTitle: "Chapter 4: Proof of Chemistry",
+      chapterTitle: "Chapter 4: The Season of Becoming",
       dateLabel: "Lab Record: Zero Doubt",
       bodyText: [
-        "Lab entry: first kiss triggered immediate system failure.",
-        "Post-kiss data shows soft chaos, rapid heartbeat, and zero desire to recover.",
-        "Conclusion: our chemistry is repeatable, undeniable, and dangerously sweet."
+        "Summer taught us how to begin.\nWinter showed us who we were becoming.",
+        "The girl who once stepped into the kayak carefully...\nnow moved like she belonged to the water.\nWatching you grow felt like watching a legend in the making.\nBrave. Adaptive. Alive.",
+        "And I couldn't help but think -\nmaybe adventure didn't find you...\nmaybe you were always adventure.\nIf Celaena had a rival, she'd be worried."
       ],
-      quoteLine: "\"Evidence complete. Verdict: keep kissing the lead scientist.\"",
-      footnote: "Lab note: hypothesis upgraded to certainty.",
+      quoteLine: "\"You didn't just learn the waves... you became one.\"",
+      footnote: "Field note: winter revealed the queen.",
       heroMedia: vid("shebecomeprokayak- vid", "She became pro kayak", true),
       supportingMedia: [
         vid("shebecomeprokayak- vid 2", "She became pro kayak 2", true),
@@ -302,7 +303,7 @@ export const book: BookConfig = {
         img("kayak_girl_adventure-5", "Kayak girl adventure 5")
       ],
       tags: ["cozy"],
-      redactedLine: "Classified result: one kiss and I was done for.",
+      redactedLine: "Field report: Attraction upgraded to awe.",
       trackId: "distance-oath",
       intensity: 0.66
     },
@@ -311,12 +312,12 @@ export const book: BookConfig = {
       chapterTitle: "Mission: The End of Summer",
       dateLabel: "Season Log: Late Golden Days",
       bodyText: [
-        "U picking food is unfairly cute; I forgot my own order twice.",
-        "Neck kisses, warm laughs, then that sleepy peace where the world finally shut up.",
-        "Summer packed its bags, winter knocked, and us stayed right here."
+        "We ran through the last warm days like we were trying to steal time itself.\nWatching you pick from the menu shouldn't have been unforgettable...\nbut somehow, you made even that look beautiful.",
+        "Neck kisses.\nSleepy peace beside you.\nLaughter between seasons.",
+        "Summer ended on the calendar...\nbut it never really left us."
       ],
-      quoteLine: "\"Seasons changed outside, but home stayed in your arms.\"",
-      footnote: "Soft truth: favorite menu is whatever u choose.",
+      quoteLine: "\"Seasons changed.\nMy feelings didn't.\"",
+      footnote: "Season note: warmth archived permanently.",
       heroMedia: vid("food_menu_picking - vid", "Food menu picking", true),
       supportingMedia: [
         vid("kissing_her_intheneck -vid", "Kissing her in the neck", true),
@@ -325,7 +326,7 @@ export const book: BookConfig = {
         img("winter_date2", "Winter date 2")
       ],
       tags: ["mission", "cozy"],
-      redactedLine: "Classified: I fell asleep smiling and called it victory.",
+      redactedLine: "Confirmed: Wherever you are... feels like summer.",
       trackId: "cozy-candlelight",
       intensity: 0.67,
       stinger: "/audio/sfx/guild-stamp.mp3"
@@ -335,12 +336,12 @@ export const book: BookConfig = {
       chapterTitle: "Chapter 5: The Making of TikTok",
       dateLabel: "Winter Log: Indoor TikTok Lab",
       bodyText: [
-        "Winter hit, so mission control moved operations to our living room studio.",
-        "Best-friend energy, bad takes, perfect laughs, and twelve retakes we definitely needed.",
-        "Every clip was goofy, cute, and secretly couple training for forever."
+        "Winter tried to trap us indoors...\nso we turned the house into a stage.",
+        "Trend after trend.\nLaugh after laugh.\nTake after take.",
+        "Somewhere between best friends and soulmates...\nwe built our own kind of fun.\nNot perfect.\nNot serious.\nJust ours."
       ],
-      quoteLine: "\"We didn't chase trends, we built our own little planet.\"",
-      footnote: "Mission note: camera roll now legally ours.",
+      quoteLine: "\"Joy looks better when it's shared.\"",
+      footnote: "Mission note: house studio, heart studio.",
       heroMedia: img("tiktok_making", "TikTok making 1"),
       supportingMedia: [
         img("tiktok_making-2", "TikTok making 2"),
@@ -355,7 +356,7 @@ export const book: BookConfig = {
         img("tiktok_making-12", "TikTok making 12")
       ],
       tags: ["goofy"],
-      redactedLine: "Classified signal: married energy detected on all channels.",
+      redactedLine: "Status update: Married energy detected early.",
       trackId: "chaos-sidequest",
       intensity: 0.7,
       stinger: "/audio/sfx/contract-sign.mp3"
@@ -365,12 +366,12 @@ export const book: BookConfig = {
       chapterTitle: "Trial: The Distance",
       dateLabel: "Trial Record: Long Nights",
       bodyText: [
-        "Signal dropped, tempers rose, and some nights felt heavier than both of us.",
-        "Still, we kept calling, kept fixing, kept choosing us through the static.",
-        "Distance tested the line, but loyalty kept reconnecting the feed."
+        "Distance tested us - quietly, relentlessly.\nScreens replaced touches.\nSilence sometimes replaced laughter.",
+        "We argued.\nWe missed each other.\nWe learned.",
+        "But even oceans couldn't teach our hearts how to quit.\nBecause every night ended the same way -\nchoosing us again."
       ],
-      quoteLine: "\"Interference was real, but so was our decision to stay.\"",
-      footnote: "Field note: no perfect days, just real love.",
+      quoteLine: "\"Distance was loud... but love was louder.\"",
+      footnote: "Signal note: reconnection always won.",
       heroMedia: vid("play_fighting-vid", "Play fighting call", true),
       supportingMedia: [
         img("Face_time", "Face time"),
@@ -379,7 +380,7 @@ export const book: BookConfig = {
         vid("co-lving - vid", "Co living setup video", true)
       ],
       tags: ["trial", "cozy"],
-      redactedLine: "Classified oath: wherever u are, I'm still on your side.",
+      redactedLine: "Transmission secured: Always you.",
       trackId: "distance-oath",
       intensity: 0.74,
       stinger: "/audio/sfx/trial-fracture.mp3"
@@ -389,12 +390,12 @@ export const book: BookConfig = {
       chapterTitle: "Final Mission: The Oath",
       dateLabel: "Seal Log: Proposal Night",
       bodyText: [
-        "No backup plan. No safety line. Just my heart on open record.",
-        "I asked, u said yes, and even time stood still to watch it happen.",
-        "From that second on, forever stopped being theory and became our mission."
+        "No decoys.\nNo second plans.\nJust a heart standing fully exposed.",
+        "When I knelt, time didn't slow...\nit stilled.\nAnd when you said yes -\nthe universe quietly shifted into place.",
+        "Every chapter before this suddenly made sense.\nEvery step had been guiding me here.\nNot to a moment...\nbut to a lifetime with you."
       ],
-      quoteLine: "\"I put my whole life in one question, and u answered with home.\"",
-      footnote: "Hidden vow: I choose u in every timeline.",
+      quoteLine: "\"In every lifetime, in every version of this world...\nI would still find you.\"",
+      footnote: "Oath note: one question, infinite yes.",
       heroMedia: img("the_process", "Proposal process 1"),
       supportingMedia: [
         img("the_process-2", "Proposal process 2"),
@@ -417,16 +418,16 @@ export const book: BookConfig = {
       chapterTitle: "Epilogue: After the Oath",
       dateLabel: "Forward File: Next Era",
       bodyText: [
-        "After the oath, we danced like nobody was grading us and laughed like we invented joy.",
-        "Cute chaos, soft hugs, spinning in circles, then collapsing into happy silence.",
-        "New era unlocked, and the next chapter is already loading with our names on it."
+        "And then... we danced.\nNot because music was playing -\nbut because our hearts didn't know how to stand still anymore.",
+        "Laughter came easier.\nLove felt deeper.\nThe future felt closer.",
+        "This wasn't the end of our story.\nIt was the first page of the life we're about to write together."
       ],
-      quoteLine: "\"Forever isn't a finish line, it's our favorite start.\"",
-      footnote: "Forward note: more dances, more kisses, more us.",
+      quoteLine: "\"The best part of us... is still on the way.\"",
+      footnote: "Forward note: joy in motion.",
       heroMedia: vid("Video Project 2", "Video Project 2 dance"),
       supportingMedia: [vid("Video Project 3", "Video Project 3 dance")],
       tags: ["epilogue", "cozy"],
-      redactedLine: "Classified future: best days still incoming.",
+      redactedLine: "Next chapter loading: Husband & Wife.",
       trackId: "dragon-vow-proposal",
       intensity: 0.82,
       stinger: "/audio/sfx/portal-shift.mp3"

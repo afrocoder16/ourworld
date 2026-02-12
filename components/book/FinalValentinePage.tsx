@@ -7,6 +7,7 @@ import { BookConfig } from "@/content/book";
 import { ConfettiBurst } from "@/components/effects/ConfettiBurst";
 import { WaxSeal } from "@/components/effects/WaxSeal";
 import { cn } from "@/lib/cn";
+import { dispatchCodexAudio } from "@/lib/audio-events";
 
 type FinalValentinePageProps = {
   config: BookConfig["finalPrompt"];
@@ -27,6 +28,8 @@ const owedTreats = [
   "I owe you a flower date",
   "I owe you breakfast in bed"
 ];
+
+const harryPotterEffectSrc = "/audio/Harry Potter.mp3";
 
 const loveStormTokens = ["💖", "💘", "💕", "💞", "❤️", "LOVE", "YOU", "😍"];
 
@@ -64,6 +67,7 @@ export function FinalValentinePage({ config }: FinalValentinePageProps) {
   }, [reduceMotion, sealed]);
 
   const onYes = () => {
+    dispatchCodexAudio({ action: "sfx", src: harryPotterEffectSrc, intensity: 1 });
     setBurstTick((prev) => prev + 1);
     setSealed(true);
     setNoAttempts(0);

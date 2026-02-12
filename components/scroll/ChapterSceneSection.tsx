@@ -11,6 +11,7 @@ import { CrackedLineReveal } from "@/components/scroll/CrackedLineReveal";
 import { RecoveredDmArtifact } from "@/components/scroll/RecoveredDmArtifact";
 import { getTagWatermark, getWorldModules } from "@/lib/world-engine";
 import { cn } from "@/lib/cn";
+import { dispatchCodexAudio } from "@/lib/audio-events";
 
 type ChapterSceneSectionProps = {
   chapter: Chapter;
@@ -78,6 +79,11 @@ const epilogueClipLabelByName: Record<string, string> = {
   "video project 2": "Moonlight Dance Cut",
   "video project 3": "Twirl & Giggles Cut"
 };
+const dragonRoarEffectSrc = "/audio/Dragon roar sound effect - Sound Treasures.mp3";
+const publicTrackSrc = "/audio/PUBLIC.mp3";
+const elvisTrackSrc = "/audio/Elvis Presley.mp3";
+const taioTrackSrc = "/audio/Taio Cruz.mp3";
+const alexWarrenTrackSrc = "/audio/Alex Warren.mp3";
 
 const getMediaBaseName = (src: string) => {
   const fileName = src.split("/").pop() ?? src;
@@ -222,6 +228,14 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
   const epilogueAfterOath = chapter.id === "epilogue-after-oath";
   const finalMissionOath = chapter.id === "final-mission-oath";
   const sideQuestAdventure = chapter.id === "chapter-3-side-quest-adventure";
+  const missionTwoFools = chapter.id === "mission-03-city-walk";
+  const manuscriptRomance =
+    chapter.id === "chapter-4-proof-of-chemistry" ||
+    chapter.id === "mission-04-end-of-summer" ||
+    chapter.id === "chapter-5-chaos-but-ours" ||
+    chapter.id === "trial-distance" ||
+    chapter.id === "final-mission-oath" ||
+    chapter.id === "epilogue-after-oath";
   const epilogueMediaDeck = epilogueAfterOath ? [chapter.heroMedia, ...chapter.supportingMedia] : [];
   const finalMissionMediaSequence = finalMissionOath
     ? [chapter.heroMedia, ...chapter.supportingMedia].sort((a, b) => getFinalMissionOrder(a.src) - getFinalMissionOrder(b.src))
@@ -238,6 +252,7 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
   const [finalMissionSlideIndex, setFinalMissionSlideIndex] = useState(0);
   const [epilogueDanceIndex, setEpilogueDanceIndex] = useState(0);
   const [epilogueDanceFinished, setEpilogueDanceFinished] = useState(false);
+  const [epilogueIncendioOn, setEpilogueIncendioOn] = useState(false);
   const [dragonSweep, setDragonSweep] = useState(false);
   const [missionStampPulse, setMissionStampPulse] = useState(false);
   const [fateThreadActive, setFateThreadActive] = useState(false);
@@ -352,7 +367,11 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
   }, [epilogueAfterOath, epilogueMediaDeck.length]);
 
   useEffect(() => {
-    if (!epilogueAfterOath || !active) return;
+    if (!epilogueAfterOath) return;
+    if (!active) {
+      setEpilogueIncendioOn(false);
+      return;
+    }
     setEpilogueDanceFinished(false);
   }, [active, epilogueAfterOath, epilogueDanceIndex]);
 
@@ -456,6 +475,7 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
     if (worldOfHerDragonTimeoutRef.current) {
       window.clearTimeout(worldOfHerDragonTimeoutRef.current);
     }
+    dispatchCodexAudio({ action: "sfx", src: dragonRoarEffectSrc, intensity: 1 });
     setWorldOfHerDragonFireTick((prev) => prev + 1);
     setWorldOfHerDragonFireActive(true);
     worldOfHerDragonTimeoutRef.current = window.setTimeout(() => setWorldOfHerDragonFireActive(false), 7600);
@@ -514,6 +534,7 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
 
   const triggerCandleRevelio = () => {
     if (!candlelightCollage) return;
+    dispatchCodexAudio({ action: "track", src: publicTrackSrc, label: "PUBLIC", intensity: 0.64 });
     clearCandleTimers();
     candleQuoteInkDoneForTickRef.current = -1;
     setCandleRevelioUnlocked(true);
@@ -585,11 +606,25 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
 
   const toggleSideQuestDaggerTab = () => {
     if (!sideQuestAdventure) return;
+    if (!sideQuestTabOpen) {
+      dispatchCodexAudio({ action: "track", src: elvisTrackSrc, label: "Elvis Presley", intensity: 0.62 });
+    }
     setSideQuestBladeTick((prev) => prev + 1);
     if (!sideQuestTabOpen) {
       setSideQuestInkWriteTick((prev) => prev + 1);
     }
     setSideQuestTabOpen((prev) => !prev);
+  };
+
+  const lockProposalOath = () => {
+    dispatchCodexAudio({ action: "track", src: taioTrackSrc, label: "Taio Cruz", intensity: 0.7 });
+    setProposalUnlocked(true);
+  };
+
+  const triggerEpilogueIncendio = () => {
+    if (!epilogueAfterOath) return;
+    dispatchCodexAudio({ action: "track", src: alexWarrenTrackSrc, label: "Alex Warren", intensity: 0.72 });
+    setEpilogueIncendioOn(true);
   };
 
   const quoteWords = chapter.quoteLine.split(" ");
@@ -1033,7 +1068,7 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
             isPrologue && "lg:min-h-[66vh] lg:p-8",
             firstEncounterCinema && "border-amber-800/40 bg-[linear-gradient(160deg,rgba(246,231,199,0.97),rgba(232,202,154,0.92))] pt-20",
             reservationLiePsy && "border-cyan-300/25 bg-[linear-gradient(155deg,rgba(246,233,204,0.93),rgba(225,205,171,0.9))]",
-            sideQuestAdventure && "border-[#9c8a68]/55 pt-12 text-[#20170f] shadow-[0_28px_70px_rgba(0,0,0,0.42)]"
+            sideQuestAdventure && "border-[#9c8a68]/55 pt-7 text-[#20170f] shadow-[0_28px_70px_rgba(0,0,0,0.42)]"
           )}
           onMouseEnter={sideQuestAdventure ? () => setSideQuestHover(true) : undefined}
           onMouseLeave={sideQuestAdventure ? () => setSideQuestHover(false) : undefined}
@@ -1470,7 +1505,7 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
                   {cityWalkOrbitActive ? "pause orbit" : "start orbit"}
                 </button>
               ) : null}
-              {active ? (
+              {active && !(worldOfHerCollage || candlelightCollage || sideQuestAdventure || missionTwoFools) ? (
                 <motion.svg viewBox="0 0 460 60" fill="none" className="pointer-events-none mt-2 h-5 w-[220px] text-amber-700/40">
                   <motion.path
                     d="M4 44 C74 16, 132 58, 204 28 C248 10, 292 30, 456 22"
@@ -1578,7 +1613,7 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
           ) : null}
 
           {candlelightCollage ? (
-            <div className={cn("relative mt-5 space-y-3 text-ink/90", sideQuestAdventure && "mx-auto w-[92%]")}>
+            <div className={cn("relative mt-3 space-y-3 text-ink/90", sideQuestAdventure && "mx-auto w-[92%]")}>
               {chapter.bodyText.map((line, i) => (
                 <motion.div
                   key={`candle-line-wrap-${candleInkSequenceTick}-${i}`}
@@ -1607,7 +1642,7 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
               ))}
             </div>
           ) : worldOfHerCollage ? (
-            <div className={cn("relative mt-5 space-y-3 text-ink/90", sideQuestAdventure && "mx-auto w-[92%]")}>
+            <div className={cn("relative mt-3 space-y-3 text-ink/90", sideQuestAdventure && "mx-auto w-[92%]")}>
               {chapter.bodyText.map((line, i) => (
                 <motion.article
                   key={`${chapter.id}-world-ledger-line-${i}`}
@@ -1697,6 +1732,50 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
                 {chapter.bodyText[2]}
               </motion.p>
             </div>
+          ) : sideQuestAdventure || missionTwoFools ? (
+            <div className={cn("relative mt-2 space-y-2.5 text-ink/90", sideQuestAdventure && "mx-auto w-[92%]")}>
+              {chapter.bodyText.map((line, i) => (
+                <motion.div
+                  key={`${chapter.id}-styled-line-${i}`}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: reduceMotion ? 0.01 : 0.3, delay: reduceMotion ? 0 : i * 0.06, ease: "easeOut" }}
+                  className="relative px-1"
+                >
+                  <p
+                    className={cn(
+                      "whitespace-pre-line text-[0.98rem] leading-[1.64]",
+                      sideQuestAdventure
+                        ? "text-[#2a1e13]/90 [text-shadow:0_0_6px_rgba(82,56,28,0.12)]"
+                        : "text-ink/88 [text-shadow:0_0_6px_rgba(82,56,28,0.08)]",
+                      i === 0 && "first-letter:float-left first-letter:mr-2 first-letter:font-display first-letter:text-[1.9rem] first-letter:leading-[1] first-letter:text-[#6b4a2d]"
+                    )}
+                  >
+                    {line}
+                  </p>
+                  {i < chapter.bodyText.length - 1 ? (
+                    <span className="mt-1.5 block h-px w-full bg-[linear-gradient(90deg,rgba(82,56,29,0.18),rgba(82,56,29,0.04),rgba(82,56,29,0.18))]" />
+                  ) : null}
+                </motion.div>
+              ))}
+            </div>
+          ) : manuscriptRomance ? (
+            <div className="relative mt-3 space-y-2.5 text-ink/90">
+              {chapter.bodyText.map((line, i) => (
+                <motion.p
+                  key={`${chapter.id}-manuscript-line-${i}`}
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: reduceMotion ? 0.01 : 0.3, delay: reduceMotion ? 0 : i * 0.07, ease: "easeOut" }}
+                  className={cn(
+                    "whitespace-pre-line text-[1rem] leading-[1.63] text-ink/88",
+                    i === 0 && "first-letter:float-left first-letter:mr-2 first-letter:font-display first-letter:text-[1.9rem] first-letter:leading-[1] first-letter:text-[#6a4729]"
+                  )}
+                >
+                  {line}
+                </motion.p>
+              ))}
+            </div>
           ) : (
             <div className={cn("relative mt-5 space-y-2 text-xl leading-relaxed text-ink/90", sideQuestAdventure && "mx-auto w-[92%]")}>
               {chapter.bodyText.map((line, i) => (
@@ -1736,7 +1815,13 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
           <blockquote
             className={cn(
               "relative mt-4 border-l-2 border-gold/45 pl-3 font-display italic text-ink/85",
-              worldOfHerCollage || candlelightCollage ? "text-[1.45rem] leading-[1.3]" : "text-2xl",
+              worldOfHerCollage || candlelightCollage
+                ? "text-[1.45rem] leading-[1.3]"
+                : sideQuestAdventure || missionTwoFools
+                  ? "text-[1.85rem] leading-[1.22]"
+                  : manuscriptRomance
+                    ? "whitespace-pre-line text-[1.72rem] leading-[1.2]"
+                    : "text-2xl",
               sideQuestAdventure && "mx-auto w-[92%]"
             )}
           >
@@ -1776,6 +1861,20 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
             {ocean && !sideQuestAdventure ? <span className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(111,187,255,0.2),transparent_72%)]" /> : null}
           </blockquote>
           <p className={cn("mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-ink/50", sideQuestAdventure && "mx-auto w-[92%]")}>{chapter.footnote}</p>
+          {epilogueAfterOath ? (
+            <button
+              type="button"
+              onClick={triggerEpilogueIncendio}
+              className={cn(
+                "mt-3 rounded-md border px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.22em] transition",
+                epilogueIncendioOn
+                  ? "border-amber-700/55 bg-amber-200/25 text-amber-900"
+                  : "border-ink/30 bg-black/10 text-ink/75 hover:bg-black/15"
+              )}
+            >
+              Incendio
+            </button>
+          ) : null}
 
           {ocean && !sideQuestAdventure ? (
             <>
@@ -1874,6 +1973,7 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
           className={cn(
             "relative overflow-hidden rounded-2xl border border-gold/25 bg-black/40 p-4 shadow-[0_24px_60px_rgba(0,0,0,0.42)]",
             isPrologue && "lg:min-h-[66vh]",
+            (worldOfHerCollage || candlelightCollage) && "self-start",
             firstEncounterCinema && "border-amber-200/35 bg-[linear-gradient(160deg,rgba(19,17,22,0.9),rgba(11,9,14,0.96))] p-5",
             reservationLiePsy && "border-cyan-200/28 bg-[linear-gradient(160deg,rgba(10,16,24,0.88),rgba(9,12,20,0.9))]"
           )}
@@ -1908,7 +2008,7 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
             <div className="absolute inset-0 z-20 grid place-items-center bg-black/65 backdrop-blur-[2px]">
               <button
                 type="button"
-                onClick={() => setProposalUnlocked(true)}
+                onClick={lockProposalOath}
                 className="rounded-xl border border-red-200/20 bg-red-950/50 px-6 py-5 text-center"
               >
                 <WaxSeal label="Press to lock the oath" />

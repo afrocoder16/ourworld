@@ -13,6 +13,7 @@ import { TocModal } from "@/components/scroll/TocModal";
 import { AudioManager } from "@/components/scroll/AudioManager";
 import { ScrollNavButtons } from "@/components/scroll/ScrollNavButtons";
 import { getParticleMode } from "@/lib/chapter-meta";
+import { dispatchCodexAudio } from "@/lib/audio-events";
 
 const COVER_ID = "cover";
 const VAULT_ID = "vault";
@@ -40,6 +41,11 @@ export function BookShell() {
     const element = sectionRefs.current[id];
     if (!element) return;
     element.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const onEnterChapterOne = () => {
+    dispatchCodexAudio({ action: "start" });
+    scrollToSection(chapters[0].id);
   };
 
   useEffect(() => {
@@ -188,7 +194,7 @@ export function BookShell() {
             <div className="mt-7 flex flex-wrap gap-3">
               <button
                 type="button"
-                onClick={() => scrollToSection(chapters[0].id)}
+                onClick={onEnterChapterOne}
                 className="rounded-md border border-gold/55 bg-gold/15 px-5 py-3 font-mono text-xs uppercase tracking-[0.24em] text-gold transition hover:bg-gold/30"
               >
                 Enter Chapter One
