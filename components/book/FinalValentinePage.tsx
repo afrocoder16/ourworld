@@ -8,16 +8,17 @@ import { ConfettiBurst } from "@/components/effects/ConfettiBurst";
 import { WaxSeal } from "@/components/effects/WaxSeal";
 import { cn } from "@/lib/cn";
 import { dispatchCodexAudio } from "@/lib/audio-events";
+import { withBasePath } from "@/lib/base-path";
 
 type FinalValentinePageProps = {
   config: BookConfig["finalPrompt"];
 };
 
 const finaleFrames = [
-  { src: "/media/proposal_1.jpg", title: "The Question", caption: "The room held its breath." },
-  { src: "/media/proposal_2.jpg", title: "The Ring Moment", caption: "Time slowed down on purpose." },
-  { src: "/media/proposal_3.jpg", title: "She Said Yes", caption: "The yes echoed like fireworks." },
-  { src: "/media/proposal_4.jpg", title: "Forever Starts Here", caption: "Case closed. Lifetime mission." }
+  { src: withBasePath("/media/proposal_1.jpg"), title: "The Question", caption: "The room held its breath." },
+  { src: withBasePath("/media/proposal_2.jpg"), title: "The Ring Moment", caption: "Time slowed down on purpose." },
+  { src: withBasePath("/media/proposal_3.jpg"), title: "She Said Yes", caption: "The yes echoed like fireworks." },
+  { src: withBasePath("/media/proposal_4.jpg"), title: "Forever Starts Here", caption: "Case closed. Lifetime mission." }
 ];
 
 const owedTreats = [
@@ -29,7 +30,7 @@ const owedTreats = [
   "I owe you breakfast in bed"
 ];
 
-const harryPotterEffectSrc = "/audio/Harry Potter.mp3";
+const harryPotterEffectSrc = withBasePath("/audio/Harry Potter.mp3");
 
 const loveStormTokens = ["💖", "💘", "💕", "💞", "❤️", "LOVE", "YOU", "😍"];
 

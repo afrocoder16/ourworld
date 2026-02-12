@@ -36,6 +36,7 @@ export function AudioManager({ tracks, defaultTrackId, activeAudio }: AudioManag
   const fadeTimerRef = useRef<number | null>(null);
   const stingerRef = useRef<HTMLAudioElement | null>(null);
   const overlayAudioRefs = useRef<HTMLAudioElement[]>([]);
+  const manualTrackLockRef = useRef(false);
 
   const clearFadeTimer = () => {
     if (fadeTimerRef.current) {
@@ -181,6 +182,10 @@ export function AudioManager({ tracks, defaultTrackId, activeAudio }: AudioManag
       playStinger(activeAudio.stinger);
     }
 
+    if (manualTrackLockRef.current) {
+      return;
+    }
+
     if (trackChanged) {
       void playTrack(activeAudio.trackId, activeAudio.intensity, true);
       return;
@@ -247,6 +252,7 @@ export function AudioManager({ tracks, defaultTrackId, activeAudio }: AudioManag
       }
 
       if (detail.action === "track") {
+        manualTrackLockRef.current = true;
         if (detail.trackId) {
           void playTrack(detail.trackId, detail.intensity ?? (currentIntensity || 0.6), Boolean(audioRef.current));
           return;

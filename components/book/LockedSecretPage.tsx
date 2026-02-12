@@ -49,8 +49,8 @@ export function LockedSecretPage({ config }: LockedSecretPageProps) {
       </div>
       {!unlocked ? (
         <form onSubmit={submit} className="space-y-3 rounded-xl border border-gold/20 bg-black/20 p-4">
-          <h3 className="font-display text-xl text-ink">Restricted page: vault key required</h3>
-          <p className="text-sm text-ink/70">{config.hint}</p>
+          <h3 className="font-display text-xl text-ink">Sealed Message — Enter A Gift Of Love</h3>
+          <p className="whitespace-pre-line text-sm text-ink/70">{config.hint}</p>
           <div className="relative overflow-hidden rounded-lg border border-gold/25 bg-black/30 p-3">
             <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-ink/60">Inheritance Chest Protocol</div>
             <div className="relative h-16">

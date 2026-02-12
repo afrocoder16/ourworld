@@ -14,6 +14,7 @@ import { AudioManager } from "@/components/scroll/AudioManager";
 import { ScrollNavButtons } from "@/components/scroll/ScrollNavButtons";
 import { getParticleMode } from "@/lib/chapter-meta";
 import { dispatchCodexAudio } from "@/lib/audio-events";
+import { withBasePath } from "@/lib/base-path";
 
 const COVER_ID = "cover";
 const VAULT_ID = "vault";
@@ -110,14 +111,14 @@ export function BookShell() {
           sectionId: activeSectionId,
           trackId: book.audio.specialTrackId,
           intensity: 0.9,
-          stinger: "/audio/sfx/rider-oath.mp3"
+          stinger: withBasePath("/audio/sfx/rider-oath.mp3")
         }
       : activeSectionId === LOCKED_ID
         ? {
             sectionId: activeSectionId,
             trackId: "veil-of-glyphs",
             intensity: 0.52,
-            stinger: "/audio/sfx/chest-unlock.mp3"
+            stinger: withBasePath("/audio/sfx/chest-unlock.mp3")
           }
         : activeSectionId === VAULT_ID
           ? {

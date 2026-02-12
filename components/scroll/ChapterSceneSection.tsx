@@ -12,6 +12,7 @@ import { RecoveredDmArtifact } from "@/components/scroll/RecoveredDmArtifact";
 import { getTagWatermark, getWorldModules } from "@/lib/world-engine";
 import { cn } from "@/lib/cn";
 import { dispatchCodexAudio } from "@/lib/audio-events";
+import { withBasePath } from "@/lib/base-path";
 
 type ChapterSceneSectionProps = {
   chapter: Chapter;
@@ -27,8 +28,8 @@ const firstEncounterScenes = [
   { id: "scene-02", label: "Scene 02", text: "Rain outside, u still said yes." },
   { id: "scene-03", label: "Scene 03", text: "Now playing: Nobody 2." }
 ];
-const worldOfHerDragonMedia = { type: "image" as const, src: "/media/dragon.jpg", alt: "Cute dragon mascot" };
-const worldOfHerBaklavaMedia = { type: "image" as const, src: "/media/our_first_Baklava.jpg", alt: "Our first baklava" };
+const worldOfHerDragonMedia = { type: "image" as const, src: withBasePath("/media/dragon.jpg"), alt: "Cute dragon mascot" };
+const worldOfHerBaklavaMedia = { type: "image" as const, src: withBasePath("/media/our_first_Baklava.jpg"), alt: "Our first baklava" };
 const sideQuestSaltSprayCount = 10;
 const sideQuestInkFleckCount = 10;
 const candleDustParticleCount = 40;
@@ -79,11 +80,11 @@ const epilogueClipLabelByName: Record<string, string> = {
   "video project 2": "Moonlight Dance Cut",
   "video project 3": "Twirl & Giggles Cut"
 };
-const dragonRoarEffectSrc = "/audio/Dragon roar sound effect - Sound Treasures.mp3";
-const publicTrackSrc = "/audio/PUBLIC.mp3";
-const elvisTrackSrc = "/audio/Elvis Presley.mp3";
-const taioTrackSrc = "/audio/Taio Cruz.mp3";
-const alexWarrenTrackSrc = "/audio/Alex Warren.mp3";
+const dragonRoarEffectSrc = withBasePath("/audio/Dragon roar sound effect - Sound Treasures.mp3");
+const publicTrackSrc = withBasePath("/audio/PUBLIC.mp3");
+const elvisTrackSrc = withBasePath("/audio/Elvis Presley.mp3");
+const taioTrackSrc = withBasePath("/audio/Taio Cruz.mp3");
+const alexWarrenTrackSrc = withBasePath("/audio/Alex Warren.mp3");
 
 const getMediaBaseName = (src: string) => {
   const fileName = src.split("/").pop() ?? src;
@@ -606,14 +607,16 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
 
   const toggleSideQuestDaggerTab = () => {
     if (!sideQuestAdventure) return;
-    if (!sideQuestTabOpen) {
-      dispatchCodexAudio({ action: "track", src: elvisTrackSrc, label: "Elvis Presley", intensity: 0.62 });
-    }
     setSideQuestBladeTick((prev) => prev + 1);
     if (!sideQuestTabOpen) {
       setSideQuestInkWriteTick((prev) => prev + 1);
     }
     setSideQuestTabOpen((prev) => !prev);
+  };
+
+  const triggerChapterFourRevealTrack = () => {
+    if (!proofChemistryLab) return;
+    dispatchCodexAudio({ action: "track", src: elvisTrackSrc, label: "Elvis Presley", intensity: 0.62 });
   };
 
   const lockProposalOath = () => {
@@ -1075,7 +1078,7 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
           style={
             sideQuestAdventure
               ? {
-                  backgroundImage: 'url("/ui/scroll-paper.png")',
+                  backgroundImage: `url("${withBasePath("/ui/scroll-paper.png")}")`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat"
@@ -1493,7 +1496,7 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
                   onClick={triggerRainBurst}
                   className="mt-2 inline-flex items-center rounded border border-sky-700/35 bg-sky-200/20 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-sky-900 transition hover:bg-sky-200/35"
                 >
-                  make it rain
+                  Meteolojinx
                 </button>
               ) : null}
               {cityWalkOrbit ? (
@@ -1965,6 +1968,8 @@ export function ChapterSceneSection({ chapter, active, index, total, sectionRef 
                       <RedactionReveal className="mt-4" text={chapter.redactedLine} />
                     </div>
                   )
+                : proofChemistryLab
+                  ? <RedactionReveal className="mt-4" text={chapter.redactedLine} onReveal={triggerChapterFourRevealTrack} />
                 : <RedactionReveal className="mt-4" text={chapter.redactedLine} />
             : null}
         </article>

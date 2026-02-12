@@ -1,3 +1,5 @@
+import { withBasePath } from "@/lib/base-path";
+
 export type MediaType = "image" | "video";
 
 export type MediaItem = {
@@ -73,18 +75,19 @@ export type BookConfig = {
 
 const img = (name: string, alt: string): MediaItem => ({
   type: "image",
-  src: `/media/${name}.jpg`,
+  src: withBasePath(`/media/${name}.jpg`),
   alt
 });
 
 const vid = (name: string, alt: string, loop = false): MediaItem => ({
   type: "video",
-  src: `/media/${name}.mp4`,
+  src: withBasePath(`/media/${name}.mp4`),
   alt,
   loop
 });
 
-const audio = (name: string): string => `/audio/${name}.mp3`;
+const audio = (name: string): string => withBasePath(`/audio/${name}.mp3`);
+const sfx = (name: string): string => withBasePath(`/audio/sfx/${name}.mp3`);
 
 export const book: BookConfig = {
   title: "The Library Codex",
@@ -116,8 +119,8 @@ export const book: BookConfig = {
     ]
   },
   locked: {
-    password: "moonseal",
-    hint: "Hint: the seal word we joked about in winter.",
+    password: "Smeagol",
+    hint: "The most precious things ever given are never placed in plain sight...\nthey are hidden where only the heart knows to look",
     secretTitle: "Classified Origin File",
     secretBody: [
       "Record shows tiny chaos agent archived as small_tinu.",
@@ -157,7 +160,7 @@ export const book: BookConfig = {
       redactedLine: "Classified note: my sleep schedule was immediately ruined.",
       trackId: "teresa-teng",
       intensity: 0.42,
-      stinger: "/audio/sfx/psynet-pulse.mp3"
+      stinger: sfx("psynet-pulse")
     },
     {
       id: "chapter-1-first-encounter",
@@ -194,7 +197,7 @@ export const book: BookConfig = {
       redactedLine: "Hidden memo: that fake anniversary became my favorite date marker.",
       trackId: "teresa-teng",
       intensity: 0.63,
-      stinger: "/audio/sfx/guild-stamp.mp3"
+      stinger: sfx("guild-stamp")
     },
     {
       id: "chapter-2-world-of-her",
@@ -213,7 +216,7 @@ export const book: BookConfig = {
       redactedLine: "Sealed truth: I fell for you in the quiet moments you didn't even realize were changing me.",
       trackId: "teresa-teng",
       intensity: 0.54,
-      stinger: "/audio/sfx/portal-shift.mp3"
+      stinger: sfx("portal-shift")
     },
     {
       id: "mission-02-candlelight-rituals",
@@ -232,7 +235,7 @@ export const book: BookConfig = {
       redactedLine: "Classified warmth: Somewhere between your smile and those quiet streets... I knew I was no longer walking alone.",
       trackId: "teresa-teng",
       intensity: 0.58,
-      stinger: "/audio/sfx/guild-stamp.mp3"
+      stinger: sfx("guild-stamp")
     },
     {
       id: "chapter-3-side-quest-adventure",
@@ -253,9 +256,9 @@ export const book: BookConfig = {
       ],
       tags: ["adventure"],
       redactedLine: "Agent note: Co-captain confirmed.",
-      trackId: "teresa-teng",
+      trackId: "distance-oath",
       intensity: 0.68,
-      stinger: "/audio/sfx/ember-burst.mp3"
+      stinger: sfx("ember-burst")
     },
     {
       id: "mission-03-city-walk",
@@ -280,7 +283,7 @@ export const book: BookConfig = {
       redactedLine: "Hidden realization: I have never been more myself than when I'm with you.",
       trackId: "distance-oath",
       intensity: 0.62,
-      stinger: "/audio/sfx/guild-stamp.mp3"
+      stinger: sfx("guild-stamp")
     },
     {
       id: "chapter-4-proof-of-chemistry",
@@ -329,7 +332,7 @@ export const book: BookConfig = {
       redactedLine: "Confirmed: Wherever you are... feels like summer.",
       trackId: "cozy-candlelight",
       intensity: 0.67,
-      stinger: "/audio/sfx/guild-stamp.mp3"
+      stinger: sfx("guild-stamp")
     },
     {
       id: "chapter-5-chaos-but-ours",
@@ -359,7 +362,7 @@ export const book: BookConfig = {
       redactedLine: "Status update: Married energy detected early.",
       trackId: "chaos-sidequest",
       intensity: 0.7,
-      stinger: "/audio/sfx/contract-sign.mp3"
+      stinger: sfx("contract-sign")
     },
     {
       id: "trial-distance",
@@ -383,7 +386,7 @@ export const book: BookConfig = {
       redactedLine: "Transmission secured: Always you.",
       trackId: "distance-oath",
       intensity: 0.74,
-      stinger: "/audio/sfx/trial-fracture.mp3"
+      stinger: sfx("trial-fracture")
     },
     {
       id: "final-mission-oath",
@@ -411,7 +414,7 @@ export const book: BookConfig = {
       redactedLine: "Case closed: forever begins now.",
       trackId: "dragon-vow-proposal",
       intensity: 0.95,
-      stinger: "/audio/sfx/rider-oath.mp3"
+      stinger: sfx("rider-oath")
     },
     {
       id: "epilogue-after-oath",
@@ -430,7 +433,7 @@ export const book: BookConfig = {
       redactedLine: "Next chapter loading: Husband & Wife.",
       trackId: "dragon-vow-proposal",
       intensity: 0.82,
-      stinger: "/audio/sfx/portal-shift.mp3"
+      stinger: sfx("portal-shift")
     }
   ]
 };

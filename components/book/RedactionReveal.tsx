@@ -7,9 +7,10 @@ import { cn } from "@/lib/cn";
 type RedactionRevealProps = {
   text: string;
   className?: string;
+  onReveal?: () => void;
 };
 
-export function RedactionReveal({ text, className }: RedactionRevealProps) {
+export function RedactionReveal({ text, className, onReveal }: RedactionRevealProps) {
   const [revealed, setRevealed] = useState(false);
   const [peeling, setPeeling] = useState(false);
 
@@ -19,6 +20,7 @@ export function RedactionReveal({ text, className }: RedactionRevealProps) {
       return;
     }
     setPeeling(true);
+    onReveal?.();
     window.setTimeout(() => {
       setPeeling(false);
       setRevealed(true);
@@ -60,4 +62,3 @@ export function RedactionReveal({ text, className }: RedactionRevealProps) {
     </button>
   );
 }
-
